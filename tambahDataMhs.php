@@ -78,7 +78,6 @@
         input[type="number"],
         input[type="date"],
         input[type="email"],
-        input[type="password"],
         select {
             width: 100%;
             padding: 12px 15px;
@@ -92,7 +91,6 @@
         input[type="number"]:focus,
         input[type="date"]:focus,
         input[type="email"]:focus,
-        input[type="password"]:focus,
         select:focus {
             outline: none;
             border-color: #667eea;
@@ -216,7 +214,6 @@
             input[type="number"],
             input[type="date"],
             input[type="email"],
-            input[type="password"],
             select {
                 padding: 10px 12px;
                 font-size: 14px;
@@ -383,11 +380,6 @@
                 <div class="form-group">
                     <label for="email">Email <span class="required">*</span></label>
                     <input type="email" id="email" name="email" placeholder="contoh@email.com" required>
-                </div>
-
-                <div class="form-grup">
-                    <label for="password">Password <span class="required">*</span></label>
-                    <input type="password" id="password" name="password" placeholder="Masukkan password" required>
                 </div>
 
                 <button type="submit" class="submit-btn">Simpan Data</button>

@@ -67,6 +67,39 @@ $result = mysqli_query($conn, $sql);
         .btn-back:hover {
             background: #5563c1;
         }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-lihat, .btn-hapus {
+            padding: 8px 12px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .btn-lihat {
+            background: #51cf66;
+            color: white;
+        }
+
+        .btn-lihat:hover {
+            background: #40c057;
+        }
+
+        .btn-hapus {
+            background: #f5576c;
+            color: white;
+        }
+
+        .btn-hapus:hover {
+            background: #d93546;
+        }
     </style>
 </head>
 <body>
@@ -85,6 +118,7 @@ $result = mysqli_query($conn, $sql);
                 <th>Kota</th>
                 <th>Email</th>
                 <th>Hobi</th>
+                <th>Aksi</th>
             </tr>
         </thead>
 
@@ -102,12 +136,18 @@ $result = mysqli_query($conn, $sql);
                         <td><?= htmlspecialchars($row['kota']); ?></td>
                         <td><?= htmlspecialchars($row['email']); ?></td>
                         <td><?= htmlspecialchars($row['hobi']); ?></td>
+                        <td>
+                            <div class="action-buttons">
+                                <a href="lihatDataMhs.php?id=<?= $row['id']; ?>" class="btn-lihat">Lihat</a>
+                                <a href="hapusDataMhs.php?id=<?= $row['id']; ?>" class="btn-hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">Hapus</a>
+                            </div>
+                        </td>
                     </tr>
             <?php
                 }
             } else { ?>
                 <tr>
-                    <td colspan="8" style="text-align:center;">Belum ada data</td>
+                    <td colspan="9" style="text-align:center;">Belum ada data</td>
                 </tr>
             <?php } ?>
         </tbody>

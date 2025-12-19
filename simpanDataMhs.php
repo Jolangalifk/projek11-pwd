@@ -42,10 +42,6 @@ if (is_array($hobi_arr)) {
 
 $email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
 
-// Password
-$password_raw = trim($_POST['password'] ?? '');
-$password = substr($password_raw, 0, 25);
-
 // Validasi minimal
 if ($nim === '' || $nama === '' || $email === '') {
     echo "Field NIM, Nama, dan Email wajib diisi.";
@@ -54,11 +50,6 @@ if ($nim === '' || $nama === '' || $email === '') {
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo "Email tidak valid.";
-    exit;
-}
-
-if (strlen($password) < 6) {
-    echo "Password minimal 6 karakter.";
     exit;
 }
 
@@ -95,8 +86,8 @@ if ($tanggal_lahir !== '') {
 }
 
 // Simpan ke database
-$sql = "INSERT INTO mhs (nim, nama, no_hp, umur, tempat_lahir, tanggal_lahir, alamat, kota, jk, status, hobi, email, password)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO mhs (nim, nama, no_hp, umur, tempat_lahir, tanggal_lahir, alamat, kota, jk, status, hobi, email)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = mysqli_prepare($conn, $sql);
 if (!$stmt) {
@@ -106,7 +97,7 @@ if (!$stmt) {
 
 mysqli_stmt_bind_param(
     $stmt,
-    "sssisssssssss",
+    "sssissssssss",
     $nim,
     $nama,
     $no_hp,
@@ -118,8 +109,7 @@ mysqli_stmt_bind_param(
     $jk,
     $status,
     $hobi,
-    $email,
-    $password
+    $email
 );
 
 $exec = mysqli_stmt_execute($stmt);
@@ -139,8 +129,7 @@ if ($exec) {
         'jk' => $jk,
         'status' => $status,
         'hobi' => $hobi,
-        'email' => $email,
-        'password' => $password
+        'email' => $email
     ];
 
     header("Location: tampilDataMhs.php");
